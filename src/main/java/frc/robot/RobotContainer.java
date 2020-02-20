@@ -16,7 +16,7 @@ import frc.robot.commands.joystickControl;
 import frc.robot.commands.moveBalls;
 //import frc.robot.commands.panelSpinning;
 import frc.robot.commands.shiftDrive;
-//import frc.robot.commands.shootBalls;
+import frc.robot.commands.shootBalls;
 import frc.robot.commands.testing;
 //import frc.robot.commands.winchClimber;
 import frc.robot.examples.ExampleSubsystem;
@@ -26,7 +26,7 @@ import frc.robot.subsystems.ballFeeder;
 //import frc.robot.subsystems.climbingWinch;
 //import frc.robot.subsystems.controlPanel;
 import frc.robot.subsystems.driveTrain;
-//import frc.robot.subsystems.flyWheel;
+import frc.robot.subsystems.flyWheel;
 import frc.robot.subsystems.intakeFolder;
 import frc.robot.subsystems.intakeOperator;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -56,7 +56,7 @@ public class RobotContainer {
   public static intakeFolder intakeFolder;
   public static intakeOperator intakeOperator;
   public static LEDLights ledlights;
-  //public static flyWheel flyWheel;
+  public static flyWheel flyWheel;
   public static ballFeeder ballFeeder;
   //public static climbingWinch climbingWinch;
   //public static controlPanel controlPanel;
@@ -99,7 +99,7 @@ public class RobotContainer {
     intakeFolder = new intakeFolder();
     intakeOperator = new intakeOperator();
     ledlights = new LEDLights();
-    //flyWheel = new flyWheel();
+    flyWheel = new flyWheel();
     ballFeeder = new ballFeeder();
     //climbingWinch = new climbingWinch();
     //controlPanel = new controlPanel();
@@ -151,11 +151,11 @@ public class RobotContainer {
     lookForLEDButton = new JoystickButton(operatorJoystick, Constants.controlPanelLEDSignal);
     lookForLEDButton.whenPressed(new testing());
 
-    //shootBallsOut = new JoystickButton(operatorJoystick, Constants.shootBallOut);
-    //shootBallsOut.whenPressed(new shootBalls());
+    shootBallsOut = new JoystickButton(operatorJoystick, Constants.shootBallOut);
+    shootBallsOut.whenPressed(new shootBalls());
 
-    //shootBallsIn = new JoystickButton(operatorJoystick, Constants.shootBallIn);
-    //shootBallsIn.whenPressed(new shootBalls());
+    shootBallsIn = new JoystickButton(operatorJoystick, Constants.shootBallIn);
+    shootBallsIn.whenPressed(new shootBalls());
 
     moveBallsIn = new JoystickButton(operatorJoystick, Constants.moveBallsIn);
     moveBallsIn.whenPressed(new moveBalls());

@@ -42,8 +42,8 @@ public class Constants {
     public static int intakeFolder = 6;
 
         //Motors for Running Flywheel; (2) Spark MAX's
-    //public static int flyWheelMaster = 7;
-    //public static int flyWheelFollower = 10;
+    public static int flyWheelMaster = 9;
+    public static int flyWheelFollower = 10;
 
         //Motors for Running Climb Gearbox; (2) Talon SRX's
     //public static int climbMaster = 12;
@@ -56,7 +56,7 @@ public class Constants {
     public static int feederFlywheel = 8;
 
         //Motor for Control Panel Motor; Spark MAX
-    //public static int controlPanel = 9;
+    //public static int controlPanel = 7;
 
 
 
