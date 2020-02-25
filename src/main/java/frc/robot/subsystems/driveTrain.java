@@ -135,7 +135,7 @@ public class driveTrain extends SubsystemBase {
     rightMaster.set(ControlMode.PercentOutput, ySpeed);
     rightMaster.getFaults(encoderFaults);
 
-    if (RobotContainer.driverJoystick.getRawButton(1)) {
+    /*if (RobotContainer.driverJoystick.getRawButton(1)) {
 
       double omega = ((leftMaster.getSelectedSensorVelocity() * Constants.kGearRatio) * 10 * ((Math.PI * 2) / Constants.kSensorUnitsPerRotation) * -1);
 
@@ -150,7 +150,7 @@ public class driveTrain extends SubsystemBase {
       //System.out.println("Out % Left: " + (leftMaster.getMotorOutputPercent() * -1));
       //System.out.println("Out % Right: " + rightMaster.getMotorOutputPercent());
       //System.out.println("Out Of Phase: " + encoderFaults.SensorOutOfPhase);
-    }
+    }*/
 
     updateLimeLightTracking();
 
