@@ -7,19 +7,18 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.Faults;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
-import frc.robot.states.shiftingGearboxStates;
-
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.Faults;
-import com.ctre.phoenix.motorcontrol.can.*;
-import com.kauailabs.navx.frc.AHRS;
 
 
 public class driveTrain extends SubsystemBase {
@@ -47,6 +46,8 @@ public class driveTrain extends SubsystemBase {
   //gyro stuff
   public AHRS ahrs;
 
+  private double steerCommand = 0.0;
+  private boolean hasValidTarget = false;
   
   public driveTrain() {
 
@@ -150,9 +151,38 @@ public class driveTrain extends SubsystemBase {
       //System.out.println("Out % Right: " + rightMaster.getMotorOutputPercent());
       //System.out.println("Out Of Phase: " + encoderFaults.SensorOutOfPhase);
     }
+
+    updateLimeLightTracking();
+
+    double steer = driverJoystick.getRawAxis(1);
+    double drive = driverJoystick.getRawAxis(0);
+    boolean auto = driverJoystick.getRawButton(8);
+
+    if (auto) {
+      if (hasValidTarget) {
+        robotDrive.arcadeDrive(drive, steerCommand)
+      }
+      else {
+        robotDrive.arcadeDrive(0.0, 0.0)
+      }
+    }
+    else {
+      driving();
+    }
+
   }
 
 
+  public void updateLimeLightTracking() {
+    final double STEER_K = 0.03;
+
+    double tx = RobotContainer.limelight.getTargetXAngle();
+
+    boolean hasValidTarget = true;
+
+    double steer_cmd = tx * STEER_K;
+    steerCommand = steer_cmd;
+  }
 
 
 
@@ -175,4 +205,7 @@ public class driveTrain extends SubsystemBase {
       shiftState = shiftingGearboxStates.IN;
     }
   }
+
+
+
 }
