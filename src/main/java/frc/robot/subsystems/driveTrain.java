@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
+import frc.robot.states.shiftingGearboxStates;
 
 
 public class driveTrain extends SubsystemBase {
@@ -154,20 +155,20 @@ public class driveTrain extends SubsystemBase {
 
     updateLimeLightTracking();
 
-    double steer = driverJoystick.getRawAxis(1);
-    double drive = driverJoystick.getRawAxis(0);
-    boolean auto = driverJoystick.getRawButton(8);
+    double steer = RobotContainer.driverJoystick.getRawAxis(1);
+    double drive = RobotContainer.driverJoystick.getRawAxis(0);
+    boolean auto = RobotContainer.driverJoystick.getRawButton(8);
 
     if (auto) {
       if (hasValidTarget) {
-        robotDrive.arcadeDrive(drive, steerCommand)
+        robotDrive.arcadeDrive(drive, steerCommand);
       }
       else {
-        robotDrive.arcadeDrive(0.0, 0.0)
+        robotDrive.arcadeDrive(0.0, 0.0);
       }
     }
     else {
-      driving();
+      //driving();
     }
 
   }
@@ -179,7 +180,7 @@ public class driveTrain extends SubsystemBase {
     double tx = RobotContainer.limelight.getTargetXAngle();
 
     boolean hasValidTarget = true;
-
+//testing changes made
     double steer_cmd = tx * STEER_K;
     steerCommand = steer_cmd;
   }
